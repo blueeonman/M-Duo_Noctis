@@ -719,6 +719,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4455dbda4988c604c84c10a6d8876953, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  horizontal: 0
+  speed: 8
+  jumpingPower: 16
+  isFacingRight: 1
+  canDash: 1
+  isDashing: 0
+  dashingPower: 24
+  dashingTime: 0.2
+  dashingCooldown: 1
   rb: {fileID: 1722741095}
   groundCheck: {fileID: 1302097625}
   groundLayer:
