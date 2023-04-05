@@ -5,20 +5,13 @@ using UnityEngine;
 public class Teleport : MonoBehaviour
 {
     // Start is called before the first frame update
-    public GameObject portal;
-    private GameObject player;
+    [SerializeField] private Transform destination;
 
 
-    void Start()
+    public Transform GetDestination()
     {
-        player = GameObject.FindWithTag("Player");
+        return destination;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.tag == "Player")
-        {
-            player.transform.position = new Vector2(portal.transform.position.x, portal.transform.position.y);
-        }
-    }
+   
 }

@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 390557624}
   m_Layer: 0
   m_Name: Teleport
-  m_TagString: Untagged
+  m_TagString: Teleport
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -221,7 +221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae1eeb8bccbd6ca489114d1a7cfacae5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  portal: {fileID: 709647030}
+  destination: {fileID: 709647034}
 --- !u!61 &390557625
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -373,7 +373,7 @@ GameObject:
   - component: {fileID: 709647031}
   m_Layer: 0
   m_Name: Teleport (1)
-  m_TagString: Untagged
+  m_TagString: Teleport
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -390,7 +390,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae1eeb8bccbd6ca489114d1a7cfacae5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  portal: {fileID: 0}
+  destination: {fileID: 390557623}
 --- !u!61 &709647032
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -946,6 +946,7 @@ GameObject:
   - component: {fileID: 1722741096}
   - component: {fileID: 1722741095}
   - component: {fileID: 1722741098}
+  - component: {fileID: 1722741099}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -1204,3 +1205,15 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 0
+--- !u!114 &1722741099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1722741092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7fc9e3fd60dfab468141d01edd1f78b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
