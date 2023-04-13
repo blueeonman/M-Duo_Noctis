@@ -8,7 +8,6 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 8f;
     public float jumpingPower = 16f;
     public bool isFacingRight = true;
-
     public bool canDash = true;
     public bool isDashing;
     public float dashingPower = 24f;
@@ -47,6 +46,8 @@ public class PlayerMovement : MonoBehaviour
         Flip();
     }
 
+    
+
     public void FixedUpdate()
     {
         if (isDashing)
@@ -54,7 +55,12 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+        if (IsGrounded())
+        {
+            rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+        }
+
+        
     }
 
     public bool IsGrounded()
