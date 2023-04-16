@@ -483,8 +483,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfbb403b19f740748bbaf2074cdf3ccd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  respawnPoint: {fileID: 0}
+  player: {fileID: 1722741092}
+  respawnPoint: {fileID: 805041137}
 --- !u!1 &709647030
 GameObject:
   m_ObjectHideFlags: 0
