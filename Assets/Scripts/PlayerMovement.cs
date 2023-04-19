@@ -4,20 +4,32 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public bool isGround;
+    private float jumpCount;
     public float horizontal;
     public float speed = 8f;
     public float jumpingPower = 16f;
     public bool isFacingRight = true;
     public bool canDash = true;
     public bool isDashing;
-    public float dashingPower = 24f;
+    public float dashingPower = 10f;
     public float dashingTime = 0.2f;
     public float dashingCooldown = 1f;
+    private float maxJump = 1f;
+    private Rigidbody2D rig;
 
-    [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private Transform groundCheck;
-    [SerializeField] private LayerMask groundLayer;
+    //[SerializeField] private Rigidbody2D rig;
+    //[SerializeField] private Transform groundCheck;
+   // [SerializeField] private LayerMask groundLayer;
     [SerializeField] private TrailRenderer tr;
+
+
+    public void Start()
+    {
+
+        rig = GetComponent<Rigidbody2D>();
+        Debug.Log($"1 Jump count = {jumpCount} e maxJump = {maxJump}");
+    }
 
     public void Update()
     {
@@ -28,22 +40,47 @@ public class PlayerMovement : MonoBehaviour
 
         horizontal = Input.GetAxisRaw("Horizontal");
 
-        if (Input.GetButtonDown("Jump") && IsGrounded())
-        {
-            rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
-        }
 
+
+        /* if (Input.GetButtonDown("Jump") && IsGrounded())
+         {
+             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+         }*/
+
+        /*
         if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
         }
-
-        if (Input.GetKeyDown(KeyCode.Space) && canDash)
+        */
+        Vector2 pos = transform.position;
+        pos.x += horizontal * speed * Time.deltaTime;
+        if (Input.GetButtonDown("Jump") && jumpCount <= maxJump)
         {
-            StartCoroutine(Dash());
+            rig.velocity = Vector2.up * speed;
+            jumpCount++;
+            Debug.Log($"2 Jump count = {jumpCount} e maxJump = {maxJump}");
         }
 
+        if (Input.GetKey("a")|| Input.GetKey("d"))
+        {
+           
+            transform.position = pos;
+        }
+
+       /* if (Input.GetKeyDown(KeyCode.Space) && canDash)
+        {
+            StartCoroutine(Dash());
+        }*/
+
         Flip();
+    }
+    void OnCollisionEnter2D(Collision2D colisor)
+    {
+
+        jumpCount = 0;
+
+      
     }
 
     
@@ -55,18 +92,20 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        if (IsGrounded())
-        {
-            rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
-        }
+        //rig.velocity = new Vector2(horizontal * speed, rig.velocity.y);
 
-        
+      
+
+
     }
 
-    public bool IsGrounded()
+  
+
+    /*public bool IsGrounded()
     {
-        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
-    }
+        //return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+    }*/
+   
 
     public void Flip()
     {
@@ -81,19 +120,19 @@ public class PlayerMovement : MonoBehaviour
 
  
 
-    public IEnumerator Dash()
+   /* public IEnumerator Dash()
     {
         canDash = false;
         isDashing = true;
-        float originalGravity = rb.gravityScale;
-        rb.gravityScale = 0f;
-        rb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
+        float originalGravity = rig.gravityScale;
+        rig.gravityScale = 0f;
+        rig.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
         tr.emitting = true;
         yield return new WaitForSeconds(dashingTime);
         tr.emitting = false;
-        rb.gravityScale = originalGravity;
+        rig.gravityScale = originalGravity;
         isDashing = false;
         yield return new WaitForSeconds(dashingCooldown);
         canDash = true;
-    }
+    }*/
 }
