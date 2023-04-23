@@ -1104,6 +1104,7 @@ GameObject:
   - component: {fileID: 1722741095}
   - component: {fileID: 1722741098}
   - component: {fileID: 1722741099}
+  - component: {fileID: 1722741100}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -1249,7 +1250,6 @@ MonoBehaviour:
   dashingPower: 24
   dashingTime: 0.2
   dashingCooldown: 1
-  rig: {fileID: 0}
   tr: {fileID: 1722741098}
 --- !u!96 &1722741098
 TrailRenderer:
@@ -1371,3 +1371,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7fc9e3fd60dfab468141d01edd1f78b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1722741100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1722741092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40fab558ad3e0e842b9ab9970e11f6e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioMixer: {fileID: 0}
+  snapshotToChangeTo: {fileID: 0}
