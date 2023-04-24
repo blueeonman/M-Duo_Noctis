@@ -12,12 +12,13 @@ public class PlayerMovement : MonoBehaviour
     public bool isFacingRight = true;
     public bool canDash = true;
     public bool isDashing;
-    public float dashingPower = 10f;
-    public float dashingTime = 0.2f;
-    public float dashingCooldown = 1f;
+    public float dashDistance = 15f;
+    public float doubleTapTime;
     private float maxJump = 1f;
     private Rigidbody2D rig;
 
+
+    KeyCode lastKeyCode;
     //[SerializeField] private Rigidbody2D rig;
     //[SerializeField] private Transform groundCheck;
    // [SerializeField] private LayerMask groundLayer;
@@ -28,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
     {
 
         rig = GetComponent<Rigidbody2D>();
-        Debug.Log($"1 Jump count = {jumpCount} e maxJump = {maxJump}");
+        //Debug.Log($"1 Jump count = {jumpCount} e maxJump = {maxJump}");
     }
 
     public void Update()
@@ -42,24 +43,14 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-        /* if (Input.GetButtonDown("Jump") && IsGrounded())
-         {
-             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
-         }*/
-
-        /*
-        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
-        }
-        */
+       
         Vector2 pos = transform.position;
         pos.x += horizontal * speed * Time.deltaTime;
         if (Input.GetButtonDown("Jump") && jumpCount <= maxJump)
         {
             rig.velocity = Vector2.up * speed;
             jumpCount++;
-            Debug.Log($"2 Jump count = {jumpCount} e maxJump = {maxJump}");
+           // Debug.Log($"2 Jump count = {jumpCount} e maxJump = {maxJump}");
         }
 
         if (Input.GetKey("a")|| Input.GetKey("d"))
@@ -68,10 +59,27 @@ public class PlayerMovement : MonoBehaviour
             transform.position = pos;
         }
 
-       /* if (Input.GetKeyDown(KeyCode.Space) && canDash)
+        if (Input.GetKeyDown(KeyCode.Space)) {
+        if (doubleTapTime > Time.time && lastKeyCode == KeyCode.A)
+            StartCoroutine(Dash(-1f));
+        } else
         {
-            StartCoroutine(Dash());
-        }*/
+            doubleTapTime = Time.time + 0.5f;
+        }
+
+        lastKeyCode = KeyCode.A;
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (doubleTapTime > Time.time && lastKeyCode == KeyCode.D)
+                StartCoroutine(Dash(1f));
+        }
+        else
+        {
+            doubleTapTime = Time.time + 0.5f;
+        }
+
+        lastKeyCode = KeyCode.D;
 
         Flip();
     }
@@ -120,19 +128,8 @@ public class PlayerMovement : MonoBehaviour
 
  
 
-   /* public IEnumerator Dash()
+   IEnumerator Dash(float direction)
     {
-        canDash = false;
-        isDashing = true;
-        float originalGravity = rig.gravityScale;
-        rig.gravityScale = 0f;
-        rig.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
-        tr.emitting = true;
-        yield return new WaitForSeconds(dashingTime);
-        tr.emitting = false;
-        rig.gravityScale = originalGravity;
-        isDashing = false;
-        yield return new WaitForSeconds(dashingCooldown);
-        canDash = true;
-    }*/
+        
+    }
 }
