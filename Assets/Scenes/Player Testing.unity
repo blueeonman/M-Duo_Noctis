@@ -1240,16 +1240,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4455dbda4988c604c84c10a6d8876953, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGround: 0
   horizontal: 0
   speed: 10
   jumpingPower: 16
   isFacingRight: 1
   canDash: 1
   isDashing: 0
-  dashingPower: 24
-  dashingTime: 0.2
-  dashingCooldown: 1
+  dashDistance: 15
+  doubleTapTime: 0
+  positionRadius: 0
+  playerPos: {fileID: 0}
+  dashSpeed: 50
+  startDashCount: 0.1
   tr: {fileID: 1722741098}
 --- !u!96 &1722741098
 TrailRenderer:
