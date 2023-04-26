@@ -1408,7 +1408,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 690e7ee68337b694d9efb0c242b54f97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 2100969631}
+  player: {fileID: 1722741092}
 --- !u!114 &1722741102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1422,11 +1422,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hook: {fileID: 1722741092}
-  hookHolder: {fileID: 0}
+  hookHolder: {fileID: 2100969631}
   hookTravelSpeed: 0
   playerTravelSpeed: 0
   hooked: 0
-  maxDistance: 0
+  maxDistance: 15
 --- !u!114 &1722741103
 MonoBehaviour:
   m_ObjectHideFlags: 0
