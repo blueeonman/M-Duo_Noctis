@@ -1060,7 +1060,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4455dbda4988c604c84c10a6d8876953, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGround: 0
   horizontal: 0
   speed: 10
   jumpingPower: 16
@@ -1069,6 +1068,16 @@ MonoBehaviour:
   isDashing: 0
   dashDistance: 15
   doubleTapTime: 0
+  positionRadius: 0
+  radius: 0
+  speed1: 1
+  hookPoint: {fileID: 0}
+  sinTime: 0
+  angle: 0
+  velocity: {x: 0, y: 0}
+  direction: 0
+  lineRenderer: {fileID: 0}
+  texture2D: {fileID: 0}
   tr: {fileID: 1257538123}
 --- !u!212 &1257538127
 SpriteRenderer:
@@ -1510,6 +1519,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2587304528108842109, guid: 9dc3bb76c79c16440b43fff550e5d386, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1257538120}
+    - target: {fileID: 2587304528108842109, guid: 9dc3bb76c79c16440b43fff550e5d386, type: 3}
+      propertyPath: respawnPoint
+      value: 
+      objectReference: {fileID: 1561454741}
     - target: {fileID: 6090382005384351305, guid: 9dc3bb76c79c16440b43fff550e5d386, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -1571,6 +1588,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1156480920957992638, guid: f7030dd6e70d6bf49af6bb3a24d2d98a, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1257538120}
+    - target: {fileID: 1156480920957992638, guid: f7030dd6e70d6bf49af6bb3a24d2d98a, type: 3}
+      propertyPath: respawnPoint
+      value: 
+      objectReference: {fileID: 1561454741}
     - target: {fileID: 8186874150552800974, guid: f7030dd6e70d6bf49af6bb3a24d2d98a, type: 3}
       propertyPath: target
       value: 
