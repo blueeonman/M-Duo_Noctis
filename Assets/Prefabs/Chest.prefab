@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9145357155224799265}
   - component: {fileID: 2089334507281278724}
   m_Layer: 0
-  m_Name: chesclosedsprite
+  m_Name: chestopensprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
