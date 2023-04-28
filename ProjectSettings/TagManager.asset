@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Teleport
+  - Hookable
   layers:
   - Default
   - TransparentFX
