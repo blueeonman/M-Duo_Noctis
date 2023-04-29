@@ -752,6 +752,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &830310282
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 830310283}
+  m_Layer: 6
+  m_Name: GrapplePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &830310283
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 830310282}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1722741094}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1302097624
 GameObject:
   m_ObjectHideFlags: 0
@@ -1106,8 +1137,6 @@ GameObject:
   - component: {fileID: 1722741099}
   - component: {fileID: 1722741100}
   - component: {fileID: 1722741103}
-  - component: {fileID: 1722741102}
-  - component: {fileID: 1722741101}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -1181,6 +1210,7 @@ Transform:
   m_Children:
   - {fileID: 1472890097}
   - {fileID: 1302097625}
+  - {fileID: 830310283}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1396,37 +1426,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 0}
   snapshotToChangeTo: {fileID: 0}
---- !u!114 &1722741101
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1722741092}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 690e7ee68337b694d9efb0c242b54f97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 1722741092}
---- !u!114 &1722741102
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1722741092}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b1ba988eed32d34187d571ecc4b9de8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hook: {fileID: 1722741092}
-  hookHolder: {fileID: 2100969631}
-  hookTravelSpeed: 0
-  playerTravelSpeed: 0
-  hooked: 0
-  maxDistance: 15
 --- !u!114 &1722741103
 MonoBehaviour:
   m_ObjectHideFlags: 0
