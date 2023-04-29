@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isOnGround;
     private float jumpCount;
     public float horizontal;
-    public float speed = 8f;
+    [SerializeField] float speed = 8f;
     public float jumpingPower = 16f;
     public bool isFacingRight = true;
     public bool canDash = true;
@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
 
 
     public float radius;
-    public float speed1 = 1f;
+   // [SerializeField] float speed1 = 5f;
 
     public Transform hookPoint;
     public float sinTime;
@@ -46,6 +46,12 @@ public class PlayerMovement : MonoBehaviour
     //KeyCode lastKeyCode;
     //[SerializeField] private Rigidbody2D rig;
     //[SerializeField] private Transform groundCheck;
+
+    GrappleHook gh;
+
+    float mx;
+    float my;
+
     LayerMask groundLayer;
     [SerializeField] private TrailRenderer tr;
 
@@ -206,6 +212,16 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-
+    private void FixedUpdate()
+    {
+        if (!gh.retracting)
+        {
+            rig.velocity = new Vector2(mx, my).normalized * speed;
+        }
+        else
+        {
+            rig.velocity = Vector2.zero;
+        }
+    }
 
 }
