@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isOnGround;
     private float jumpCount;
     public float horizontal;
-    public float speed = 8f;
+    [SerializeField] float speed = 8f;
     public float jumpingPower = 16f;
     public bool isFacingRight = true;
     public bool canDash = true;
@@ -16,20 +16,43 @@ public class PlayerMovement : MonoBehaviour
     public float doubleTapTime;
     private float maxJump = 1f;
     public float positionRadius;
+   
     private Rigidbody2D rig;
-    private SpriteRenderer sr;
-    public Transform playerPos;
 
-    KeyCode lastKeyCode;
-    public float dashSpeed;
-    private float dashCount;
-    public float startDashCount;
-    private int side;
+
+
+    public float radius;
+   // [SerializeField] float speed1 = 5f;
+
+    public Transform hookPoint;
+    public float sinTime;
+
+    public float angle = 0;
+    public Vector2 velocity;
+
+    public float direction;
+    public LineRenderer lineRenderer;
+
+    public Texture2D texture2D;
+    /* private SpriteRenderer sr;
+     public Transform playerPos;
+
+     KeyCode lastKeyCode;
+     public float dashSpeed;
+     private float dashCount;
+     public float startDashCount;
+     private int side;*/
 
     //KeyCode lastKeyCode;
     //[SerializeField] private Rigidbody2D rig;
     //[SerializeField] private Transform groundCheck;
-   LayerMask groundLayer;
+
+    GrappleHook gh;
+
+    float mx;
+    float my;
+
+    LayerMask groundLayer;
     [SerializeField] private TrailRenderer tr;
 
 
@@ -37,16 +60,17 @@ public class PlayerMovement : MonoBehaviour
     {
 
         rig = GetComponent<Rigidbody2D>();
-        sr = GetComponent<SpriteRenderer>();
+        
+        //  sr = GetComponent<SpriteRenderer>();
         //Debug.Log($"1 Jump count = {jumpCount} e maxJump = {maxJump}");
 
 
-        dashCount = startDashCount;
+        // dashCount = startDashCount;
     }
-
+   
     public void Update()
     {
-       // isOnGround = Physics2D.OverlapCircle(playerPos.position, positionRadius, groundLayer);
+        // isOnGround = Physics2D.OverlapCircle(playerPos.position, positionRadius, groundLayer);
 
 
         Vector2 pos = transform.position;
@@ -66,107 +90,138 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
+
+
         horizontal = Input.GetAxisRaw("Horizontal");
 
         Flip();
 
 
         // dash
-        if (side == 0)
+        /* if (side == 0)
+         {
+             if (Input.GetKeyDown(KeyCode.A))
+             {
+
+
+                 if (doubleTapTime > Time.time && lastKeyCode == KeyCode.A)
+                 {
+                     side = 1;
+                 }
+                 else
+                 {
+                     doubleTapTime = Time.time + 0.5f;
+                 }
+                 lastKeyCode = KeyCode.A;
+             }
+             else if (Input.GetKeyDown(KeyCode.D))
+             {
+                 if (doubleTapTime > Time.time && lastKeyCode == KeyCode.D)
+                 {
+                     side = 2;
+                 }
+                 else
+                 {
+                     doubleTapTime = Time.time + 0.5f;
+                 }
+                 lastKeyCode = KeyCode.D;
+             }
+         }
+         else
+         {
+             if (dashCount <= 0)
+             {
+                 side = 0;
+                 dashCount = startDashCount;
+                 rig.velocity = Vector2.zero;
+             }
+             else
+             {
+                 dashCount -= Time.deltaTime;
+
+                 if (side == 1)
+                 {
+                     rig.velocity = Vector2.left * dashSpeed;
+                 } else if (side == 2)
+                 {
+                     rig.velocity = Vector2.right * dashSpeed;
+                 }
+             }
+         }*/
+     }
+        void OnCollisionEnter2D(Collision2D colisor)
         {
-            if (Input.GetKeyDown(KeyCode.A))
-            {
+
+            jumpCount = 0;
 
 
-                if (doubleTapTime > Time.time && lastKeyCode == KeyCode.A)
-                {
-                    side = 1;
-                }
-                else
-                {
-                    doubleTapTime = Time.time + 0.5f;
-                }
-                lastKeyCode = KeyCode.A;
-            }
-            else if (Input.GetKeyDown(KeyCode.D))
+        }
+
+
+
+        /*public void FixedUpdate()
+        {
+            if (isDashing)
             {
-                if (doubleTapTime > Time.time && lastKeyCode == KeyCode.D)
-                {
-                    side = 2;
-                }
-                else
-                {
-                    doubleTapTime = Time.time + 0.5f;
-                }
-                lastKeyCode = KeyCode.D;
+                return;
             }
+
+            //rig.velocity = new Vector2(horizontal * speed, rig.velocity.y);
+
+
+
+
+        }
+
+
+
+        public bool IsGrounded()
+        {
+            //return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+        }*/
+
+
+        public void Flip()
+        {
+            if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
+            {
+                Vector3 localScale = transform.localScale;
+                isFacingRight = !isFacingRight;
+                localScale.x *= -1f;
+                transform.localScale = localScale;
+            }
+        }
+
+    private void SetStartingAngle()
+    {
+        float dx = transform.position.x - hookPoint.position.x;
+        float dy = transform.position.y - hookPoint.position.y;
+
+        angle = Mathf.Atan2(dy, dx) * Mathf.Rad2Deg;
+
+        if (angle < 0)
+            angle += 360;
+
+        sinTime = (angle * 2) / 100;
+
+        //Sets starting direction
+        if (angle > 270)
+            direction = -1;
+        else
+            direction = 1;
+    }
+
+
+    private void FixedUpdate()
+    {
+        if (!gh.retracting)
+        {
+            rig.velocity = new Vector2(mx, my).normalized * speed;
         }
         else
         {
-            if (dashCount <= 0)
-            {
-                side = 0;
-                dashCount = startDashCount;
-                rig.velocity = Vector2.zero;
-            }
-            else
-            {
-                dashCount -= Time.deltaTime;
-
-                if (side == 1)
-                {
-                    rig.velocity = Vector2.left * dashSpeed;
-                } else if (side == 2)
-                {
-                    rig.velocity = Vector2.right * dashSpeed;
-                }
-            }
-        }
-    }
-    void OnCollisionEnter2D(Collision2D colisor)
-    {
-
-        jumpCount = 0;
-
-      
-    }
-
-    
-
-    /*public void FixedUpdate()
-    {
-        if (isDashing)
-        {
-            return;
-        }
-
-        //rig.velocity = new Vector2(horizontal * speed, rig.velocity.y);
-
-      
-
-
-    }
-
-  
-
-    public bool IsGrounded()
-    {
-        //return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
-    }*/
-   
-
-    public void Flip()
-    {
-        if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
-        {
-            Vector3 localScale = transform.localScale;
-            isFacingRight = !isFacingRight;
-            localScale.x *= -1f;
-            transform.localScale = localScale;
+            rig.velocity = Vector2.zero;
         }
     }
 
- 
-
-  
 }
