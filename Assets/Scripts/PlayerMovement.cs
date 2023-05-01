@@ -49,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
 
     GrappleHook gh;
 
-    float mx;
+    
     float my;
 
     LayerMask groundLayer;
@@ -97,57 +97,7 @@ public class PlayerMovement : MonoBehaviour
         Flip();
 
 
-        // dash
-        /* if (side == 0)
-         {
-             if (Input.GetKeyDown(KeyCode.A))
-             {
-
-
-                 if (doubleTapTime > Time.time && lastKeyCode == KeyCode.A)
-                 {
-                     side = 1;
-                 }
-                 else
-                 {
-                     doubleTapTime = Time.time + 0.5f;
-                 }
-                 lastKeyCode = KeyCode.A;
-             }
-             else if (Input.GetKeyDown(KeyCode.D))
-             {
-                 if (doubleTapTime > Time.time && lastKeyCode == KeyCode.D)
-                 {
-                     side = 2;
-                 }
-                 else
-                 {
-                     doubleTapTime = Time.time + 0.5f;
-                 }
-                 lastKeyCode = KeyCode.D;
-             }
-         }
-         else
-         {
-             if (dashCount <= 0)
-             {
-                 side = 0;
-                 dashCount = startDashCount;
-                 rig.velocity = Vector2.zero;
-             }
-             else
-             {
-                 dashCount -= Time.deltaTime;
-
-                 if (side == 1)
-                 {
-                     rig.velocity = Vector2.left * dashSpeed;
-                 } else if (side == 2)
-                 {
-                     rig.velocity = Vector2.right * dashSpeed;
-                 }
-             }
-         }*/
+       
      }
         void OnCollisionEnter2D(Collision2D colisor)
         {
@@ -216,7 +166,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!gh.retracting)
         {
-            rig.velocity = new Vector2(mx, my).normalized * speed;
+            rig.velocity = new Vector2(horizontal, my).normalized * speed;
         }
         else
         {
