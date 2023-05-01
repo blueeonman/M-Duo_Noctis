@@ -18,11 +18,31 @@ public class GrappleHook : MonoBehaviour
 
     Vector2 target;
 
+    private void Start()
+    {
+        line = GetComponent<LineRenderer>();
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space) && !isGrappling)
         {
             StartGrapple();
+        }
+        if (retracting)
+        {
+            Vector2 grapplePos = Vector2.Lerp(transform.position, target, grappleSpeed * Time.deltaTime);
+
+            transform.position = grapplePos;
+
+            line.SetPosition(0, transform.position);
+
+            if (Vector2.Distance(transform.position, target) < 0.5)
+            {
+                retracting = false;
+                isGrappling = false;
+                line.enabled = false;
+            }
         }
     }
 
