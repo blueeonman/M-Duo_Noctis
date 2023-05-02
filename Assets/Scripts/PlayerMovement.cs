@@ -162,7 +162,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    private void FixedUpdate()
+   /* private void FixedUpdate()
     {
         if (!gh.retracting)
         {
@@ -172,6 +172,6 @@ public class PlayerMovement : MonoBehaviour
         {
             rig.velocity = Vector2.zero;
         }
-    }
+    }*/
 
 }
