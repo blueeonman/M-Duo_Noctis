@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class MeleeEnemy : MonoBehaviour
 {
-
+    public int maxHealth = 100;
+    [SerializeField] private int currenHealth;
     [SerializeField] private float attackCooldown;
     [SerializeField] private float range;
     [SerializeField] private float colliderDistance;
     [SerializeField] private int damage;
     [SerializeField] private BoxCollider2D boxCollider;
     [SerializeField] private LayerMask playerLayer;
+    public Animator animator;
     private float cooldownTimer = Mathf.Infinity;
 
     //References
@@ -19,7 +21,7 @@ public class MeleeEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        currenHealth = maxHealth;
     }
 
     private void Awake()
@@ -68,5 +70,27 @@ public class MeleeEnemy : MonoBehaviour
         {
             //playerHealth.TakeDamage(damage);
         }
+    }
+    public void TakeDamage(int damage)
+    {
+        currenHealth -= damage;
+        //play hurt animation
+        animator.SetTrigger("Hurt");
+        if(currenHealth <= 0)
+        {
+            Die();
+        }
+
+    }
+    void Die()
+    {
+        // Die animation
+        animator.SetBool("IsDead", true);
+        
+        Debug.Log(this.gameObject.name + "died!");
+        //Disable enemy
+        GetComponent<Collider2D>().enabled = false;
+        this.enabled = false;
+
     }
 }
