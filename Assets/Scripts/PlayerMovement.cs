@@ -17,10 +17,10 @@ public class PlayerMovement : MonoBehaviour
     private float maxJump = 1f;
     public float positionRadius;
     public FlipSprite flipSprite;
-   
+    public BoxCollider2D boxCollider2D;
     private Rigidbody2D rig;
-
-
+    public bool isGrounded;
+    public Animator animator;
 
     public float radius;
    // [SerializeField] float speed1 = 5f;
@@ -80,13 +80,13 @@ public class PlayerMovement : MonoBehaviour
         {
             rig.velocity = Vector2.up * speed;
             jumpCount++;
+            animator.SetTrigger("Jump");
             // Debug.Log($"2 Jump count = {jumpCount} e maxJump = {maxJump}");
         }
 
 
         if (Input.GetKey("a") || Input.GetKey("d"))
         {
-
             transform.position = pos;
         }
 
@@ -94,44 +94,62 @@ public class PlayerMovement : MonoBehaviour
 
 
         horizontal = Input.GetAxisRaw("Horizontal");
-
+        animator.SetFloat("xSpeed", Mathf.Abs(horizontal * speed));
+        animator.SetBool("Grounded", isGrounded);
         flipSprite.Flip();
 
 
        
      }
-        void OnCollisionEnter2D(Collision2D colisor)
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        jumpCount = 0;
+        isGrounded = true;
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        isGrounded = false;
+    }
+
+
+
+
+
+
+    /*public void FixedUpdate()
+    {
+        if (isDashing)
         {
-
-            jumpCount = 0;
-
-
+            return;
         }
 
+        //rig.velocity = new Vector2(horizontal * speed, rig.velocity.y);
 
 
-        /*public void FixedUpdate()
+
+
+    }
+
+
+*/
+    public bool IsGrounded()
         {
-            if (isDashing)
-            {
-                return;
-            }
-
-            //rig.velocity = new Vector2(horizontal * speed, rig.velocity.y);
-
-
-
-
+        float extraHeightTest = 0.01f;
+        RaycastHit2D hit = Physics2D.Raycast(boxCollider2D.bounds.center, Vector2.down, boxCollider2D.bounds.extents.y + extraHeightTest);
+        Color rayColor;
+            if (hit.collider != null)
+                {
+                    rayColor = Color.green;
+                }
+            else
+                {
+                    rayColor = Color.red;
+                }
+        Debug.DrawRay(boxCollider2D.bounds.center, Vector2.down * (boxCollider2D.bounds.extents.y + extraHeightTest));
+        return hit.collider != null;
         }
 
-
-
-        public bool IsGrounded()
-        {
-            //return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
-        }*/
-
-
+    /*
         /*public void Flip()
         {
             if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)

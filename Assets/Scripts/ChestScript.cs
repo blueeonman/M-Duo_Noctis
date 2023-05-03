@@ -8,6 +8,7 @@ public class ChestScript : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public GameObject objectToSpawn;
     public Sprite newSprite;
+    bool playerColliding;
     void ChangeSprite(Sprite newSprite)
     {
         spriteRenderer.sprite = newSprite;
@@ -24,12 +25,29 @@ public class ChestScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && playerColliding)
 
         {
             ChangeSprite(newSprite);
             SpawnObject(objectToSpawn);
         }
     }
-   
+
+    void OnColliderEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            playerColliding = true;
+        }
+    }
+
+    void OnColliderExit2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            playerColliding = false;
+        }
+    }
+    
+
 }

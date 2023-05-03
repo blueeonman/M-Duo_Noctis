@@ -140,7 +140,7 @@ MonoBehaviour:
   maxDistnace: 20
   launchToPoint: 1
   launchType: 0
-  launchSpeed: 1
+  launchSpeed: 3
   autoConfigureDistance: 1
   targetDistance: 3
   targetFrequncy: 1
@@ -326,38 +326,29 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
+      inSlope: 0.40162092
+      outSlope: 0.40162092
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.008397743
-      value: 0.99298054
-      inSlope: 0.27512878
-      outSlope: 0.27512878
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.67902887
-      value: 1.0072814
-      inSlope: 0.2224451
-      outSlope: 0.2224451
-      tangentMode: 0
+      time: 0.38917068
+      value: 0.15629908
+      inSlope: 0.89142954
+      outSlope: 0.89142954
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
+      inSlope: 1.3812382
+      outSlope: 1.3812382
+      tangentMode: 34
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.33333334
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -751,6 +742,7 @@ GameObject:
   - component: {fileID: 5046367221057557269}
   - component: {fileID: 8215115439210407354}
   - component: {fileID: 4886610086418548498}
+  - component: {fileID: 7146268830628609209}
   m_Layer: 7
   m_Name: playerWithGrapple
   m_TagString: Player
@@ -850,7 +842,10 @@ MonoBehaviour:
   dashDistance: 15
   doubleTapTime: 0
   positionRadius: 0
-  flipSprite: {fileID: 0}
+  flipSprite: {fileID: 4886610087541800030}
+  boxCollider2D: {fileID: 5046367221057557265}
+  isGrounded: 0
+  animator: {fileID: 4886610087541800028}
   radius: 0
   hookPoint: {fileID: 0}
   sinTime: 0
@@ -1035,7 +1030,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5046367221057557277}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: aacef4c187c30e64cbaf8803fa32aae4, type: 2}
   m_CullingMode: 0
@@ -1081,6 +1076,26 @@ SpringJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 187.50421
+  m_Distance: 74.40248
   m_DampingRatio: 1
   m_Frequency: 1
+--- !u!114 &7146268830628609209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5046367221057557277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 034def80ac9b22241aeaed0980d84bfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 4886610087541800028}
+  attackpoint: {fileID: 0}
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  attackRange: 0.5
+  attackDamage: 50
+  attackRate: 2
