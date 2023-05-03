@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     public float doubleTapTime;
     private float maxJump = 1f;
     public float positionRadius;
+    public FlipSprite flipSprite;
    
     private Rigidbody2D rig;
 
@@ -94,7 +95,7 @@ public class PlayerMovement : MonoBehaviour
 
         horizontal = Input.GetAxisRaw("Horizontal");
 
-        Flip();
+        flipSprite.Flip();
 
 
        
@@ -131,7 +132,7 @@ public class PlayerMovement : MonoBehaviour
         }*/
 
 
-        public void Flip()
+        /*public void Flip()
         {
             if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
             {
@@ -140,7 +141,7 @@ public class PlayerMovement : MonoBehaviour
                 localScale.x *= -1f;
                 transform.localScale = localScale;
             }
-        }
+        }*/
 
     private void SetStartingAngle()
     {

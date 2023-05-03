@@ -11,7 +11,7 @@ public class GrappleRope : MonoBehaviour
     public LineRenderer m_lineRenderer;
 
     [Header("General Settings:")]
-    [SerializeField] private int percision = 40;
+    [SerializeField] private int precision = 40;
     [Range(0, 20)] [SerializeField] private float straightenLineSpeed = 5;
 
     [Header("Rope Animation Settings:")]
@@ -32,7 +32,7 @@ public class GrappleRope : MonoBehaviour
     private void OnEnable()
     {
         moveTime = 0;
-        m_lineRenderer.positionCount = percision;
+        m_lineRenderer.positionCount = precision;
         waveSize = StartWaveSize;
         strightLine = false;
 
@@ -49,7 +49,7 @@ public class GrappleRope : MonoBehaviour
 
     private void LinePointsToFirePoint()
     {
-        for (int i = 0; i < percision; i++)
+        for (int i = 0; i < precision; i++)
         {
             m_lineRenderer.SetPosition(i, grapplingGun.firePoint.position);
         }
@@ -65,7 +65,7 @@ public class GrappleRope : MonoBehaviour
     {
         if (!strightLine)
         {
-            if (m_lineRenderer.GetPosition(percision - 1).x == grapplingGun.grapplePoint.x)
+            if (m_lineRenderer.GetPosition(precision - 1).x == grapplingGun.grapplePoint.x)
             {
                 strightLine = true;
             }
@@ -99,9 +99,9 @@ public class GrappleRope : MonoBehaviour
 
     void DrawRopeWaves()
     {
-        for (int i = 0; i < percision; i++)
+        for (int i = 0; i < precision; i++)
         {
-            float delta = (float)i / ((float)percision - 1f);
+            float delta = (float)i / ((float)precision - 1f);
             Vector2 offset = Vector2.Perpendicular(grapplingGun.grappleDistanceVector).normalized * ropeAnimationCurve.Evaluate(delta) * waveSize;
             Vector2 targetPosition = Vector2.Lerp(grapplingGun.firePoint.position, grapplingGun.grapplePoint, delta) + offset;
             Vector2 currentPosition = Vector2.Lerp(grapplingGun.firePoint.position, targetPosition, ropeProgressionCurve.Evaluate(moveTime) * ropeProgressionSpeed);
