@@ -8,7 +8,7 @@ public class AudioSnapshotChanger : MonoBehaviour
     public AudioMixer audioMixer;
     public AudioMixerSnapshot snapshotToChangeTo;
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player")) // Replace "Player" with the tag of the object you want to trigger the change
         {
