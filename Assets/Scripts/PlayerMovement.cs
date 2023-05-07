@@ -17,7 +17,9 @@ public class PlayerMovement : MonoBehaviour
     private float maxJump = 1f;
     public float positionRadius;
     public FlipSprite flipSprite;
-   
+    
+
+
     private Rigidbody2D rig;
 
 
@@ -161,6 +163,8 @@ public class PlayerMovement : MonoBehaviour
         else
             direction = 1;
     }
+
+  
 
 
    /* private void FixedUpdate()
