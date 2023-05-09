@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
 
 
     private Rigidbody2D rig;
-
+    public Animator animator;
 
 
     public float radius;
