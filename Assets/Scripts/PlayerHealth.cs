@@ -25,14 +25,23 @@ public class PlayerHealth : MonoBehaviour
         {
             Respawn();
         }
+    }
 
-        void Respawn()
+    void Respawn()
+    {
+
+        Scene currentScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(currentScene.name);
+        player.transform.position = respawnPoint.position;
+
+    }
+
+    public void TakeDamage(int damageAmount)
+    {
+        health -= damageAmount;
+        if(health <= 0)
         {
-           
-                Scene currentScene = SceneManager.GetActiveScene();
-                SceneManager.LoadScene(currentScene.name);
-                player.transform.position = respawnPoint.position;
-            
+            //Respawn();
         }
     }
 }

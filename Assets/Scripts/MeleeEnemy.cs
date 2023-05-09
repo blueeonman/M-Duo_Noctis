@@ -5,11 +5,11 @@ using UnityEngine;
 public class MeleeEnemy : MonoBehaviour
 {
     public int maxHealth = 100;
-    [SerializeField] private int currenHealth;
+    [SerializeField] private int currentHealth;
     [SerializeField] private float attackCooldown;
     [SerializeField] private float range;
     [SerializeField] private float colliderDistance;
-    [SerializeField] private int damage;
+    [SerializeField] private int damage = 1;
     [SerializeField] private BoxCollider2D boxCollider;
     [SerializeField] private LayerMask playerLayer;
     public Animator animator;
@@ -17,16 +17,18 @@ public class MeleeEnemy : MonoBehaviour
 
     //References
     private Animator anim;
-    private Health playerHealth;
+    private PlayerHealth playerHealth;
     // Start is called before the first frame update
     void Start()
     {
-        currenHealth = maxHealth;
+        currentHealth = maxHealth;
+        playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
     }
 
     private void Awake()
     {
         anim = GetComponent<Animator>();
+        playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
     }
     // Update is called once per frame
     private void Update()
@@ -52,7 +54,7 @@ public class MeleeEnemy : MonoBehaviour
 
         if (hit.collider != null)
         {
-            playerHealth = hit.transform.GetComponent<Health>();
+            playerHealth = hit.transform.GetComponent <PlayerHealth>();
         }
 
         return hit.collider != null;
@@ -68,15 +70,16 @@ public class MeleeEnemy : MonoBehaviour
     {
         if (PlayerInSight())
         {
-            //playerHealth.TakeDamage(damage);
+            playerHealth.TakeDamage(damage);
+            Debug.Log("player attacked!");
         }
     }
     public void TakeDamage(int damage)
     {
-        currenHealth -= damage;
+        currentHealth -= damage;
         //play hurt animation
-        animator.SetTrigger("Hurt");
-        if(currenHealth <= 0)
+        //animator.SetTrigger("Hurt");
+        if(currentHealth <= 0)
         {
             Die();
         }
@@ -85,12 +88,12 @@ public class MeleeEnemy : MonoBehaviour
     void Die()
     {
         // Die animation
-        animator.SetBool("IsDead", true);
+        //animator.SetBool("IsDead", true);
         
         Debug.Log(this.gameObject.name + "died!");
         //Disable enemy
         GetComponent<Collider2D>().enabled = false;
-        this.enabled = false;
+        gameObject.SetActive(false);
 
     }
 }

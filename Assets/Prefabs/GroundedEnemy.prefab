@@ -135,10 +135,9 @@ GameObject:
   - component: {fileID: 8186874150552800972}
   - component: {fileID: 8186874150552800973}
   - component: {fileID: 8186874150552800974}
-  - component: {fileID: 8186874150552800977}
   - component: {fileID: 8186874150552800978}
   - component: {fileID: 8186874150552800976}
-  - component: {fileID: 1156480920957992638}
+  - component: {fileID: 7747904565438721540}
   m_Layer: 0
   m_Name: GroundedEnemy
   m_TagString: Untagged
@@ -246,26 +245,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   target: {fileID: 0}
---- !u!114 &8186874150552800977
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8186874150552800975}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e25621abf3cfede44bb4ece0723a6edc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackCooldown: 1
-  range: 1
-  colliderDistance: 1
-  damage: 1
-  boxCollider: {fileID: 8186874150552800978}
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!61 &8186874150552800978
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -313,7 +292,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 6
---- !u!114 &1156480920957992638
+--- !u!114 &7747904565438721540
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -322,8 +301,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 8186874150552800975}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dfbb403b19f740748bbaf2074cdf3ccd, type: 3}
+  m_Script: {fileID: 11500000, guid: e25621abf3cfede44bb4ece0723a6edc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  respawnPoint: {fileID: 0}
+  maxHealth: 100
+  currenHealth: 0
+  attackCooldown: 2
+  range: 0
+  colliderDistance: 0
+  damage: 1
+  boxCollider: {fileID: 8186874150552800978}
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  animator: {fileID: 0}
