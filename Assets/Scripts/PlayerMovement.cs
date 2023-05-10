@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     private float jumpCount;
     public float horizontal;
     [SerializeField] float speed = 8f;
+    private BoxCollider2D boxCollider;
     public float jumpingPower = 16f;
     public bool isFacingRight = true;
     public bool canDash = true;
@@ -18,13 +19,7 @@ public class PlayerMovement : MonoBehaviour
     public float positionRadius;
     public FlipSprite flipSprite;
     
-    private enum MovementState
-    {
-        Idle,
-        Walk,
-        Jump
-
-    }
+  
 
     private Rigidbody2D rig;
     public Animator animator;
@@ -71,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
 
         rig = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        isOnGround = false;
+        
         
         //  sr = GetComponent<SpriteRenderer>();
         //Debug.Log($"1 Jump count = {jumpCount} e maxJump = {maxJump}");
@@ -85,11 +80,14 @@ public class PlayerMovement : MonoBehaviour
         // isOnGround = Physics2D.OverlapCircle(playerPos.position, positionRadius, groundLayer);
 
 
+        
+
         Vector2 pos = transform.position;
         pos.x += horizontal * speed * Time.deltaTime;
         if (Input.GetButtonDown("Jump") && jumpCount <= maxJump)
         {
-            
+
+            animator.SetTrigger("Jump");
             rig.velocity = Vector2.up * speed;
             jumpCount++;
            //animator = SetBool("Grounded");
@@ -103,6 +101,12 @@ public class PlayerMovement : MonoBehaviour
         {
 
             transform.position = pos;
+            animator.SetBool("isWalking", true);
+
+        }
+        else
+        {
+            animator.SetBool("isWalking", false);
         }
 
 
@@ -114,9 +118,11 @@ public class PlayerMovement : MonoBehaviour
 
         flipSprite.Flip();
 
-        Animation();
        
-     }
+ 
+
+
+    }
         void OnCollisionEnter2D(Collision2D colisor)
         {
 
@@ -129,40 +135,42 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-        /*public void FixedUpdate()
+   
+
+    /*public void FixedUpdate()
+    {
+        if (isDashing)
         {
-            if (isDashing)
-            {
-                return;
-            }
-
-            //rig.velocity = new Vector2(horizontal * speed, rig.velocity.y);
-
-
-
-
+            return;
         }
 
+        //rig.velocity = new Vector2(horizontal * speed, rig.velocity.y);
 
 
-       public bool IsGrounded()
+
+
+    }
+
+
+
+   public bool IsGrounded()
+    {
+        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+    }
+
+
+    /*public void Flip()
+    {
+        if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
         {
-            return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+            Vector3 localScale = transform.localScale;
+            isFacingRight = !isFacingRight;
+            localScale.x *= -1f;
+            transform.localScale = localScale;
         }
+    }*/
 
 
-        /*public void Flip()
-        {
-            if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
-            {
-                Vector3 localScale = transform.localScale;
-                isFacingRight = !isFacingRight;
-                localScale.x *= -1f;
-                transform.localScale = localScale;
-            }
-        }*/
-
-    
 
 
     private void SetStartingAngle()
@@ -185,10 +193,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
   
-    private void Animation()
-    {
-        animator.SetFloat("isWalking", Mathf.Abs(horizontal));
-    }
+    
   
 
 

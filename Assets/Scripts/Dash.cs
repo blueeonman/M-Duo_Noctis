@@ -15,6 +15,7 @@ public class Dash : MonoBehaviour
     public float startDashCount;
     private int side;
     public float doubleTapTime;
+    public Animator animator;
 
    
         public void Start()
@@ -36,7 +37,7 @@ public class Dash : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.A))
             {
-
+               
 
                 if (doubleTapTime > Time.time && lastKeyCode == KeyCode.A)
                 {
@@ -44,21 +45,27 @@ public class Dash : MonoBehaviour
                 }
                 else
                 {
+                    
                     doubleTapTime = Time.time + 0.5f;
                 }
                 lastKeyCode = KeyCode.A;
+                
             }
             else if (Input.GetKeyDown(KeyCode.D))
             {
+                
+
                 if (doubleTapTime > Time.time && lastKeyCode == KeyCode.D)
                 {
                     side = 2;
                 }
                 else
                 {
+                    
                     doubleTapTime = Time.time + 0.5f;
                 }
                 lastKeyCode = KeyCode.D;
+                
             }
         }
         else
@@ -68,6 +75,7 @@ public class Dash : MonoBehaviour
                 side = 0;
                 dashCount = startDashCount;
                 rig.velocity = Vector2.zero;
+                //animator.SetBool("isDashing", false);
             }
             else
             {
@@ -76,13 +84,22 @@ public class Dash : MonoBehaviour
                 if (side == 1)
                 {
                     rig.velocity = Vector2.left * dashSpeed;
+                    StartCoroutine(DashAnims());
                 }
                 else if (side == 2)
                 {
                     rig.velocity = Vector2.right * dashSpeed;
+                    StartCoroutine(DashAnims());
                 }
             }
         }
+    }
+    IEnumerator DashAnims()
+    {
+        
+        animator.SetBool("IsDashing", true);
+        yield return new WaitForSeconds(startDashCount);
+        animator.SetBool("IsDashing", false);
     }
 }
 
