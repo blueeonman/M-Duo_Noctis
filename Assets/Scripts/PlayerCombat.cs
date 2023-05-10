@@ -10,7 +10,7 @@ public class PlayerCombat : MonoBehaviour
     public Animator animator;
     public Transform attackpoint;
     public LayerMask enemyLayers;
-    
+    public CharacterAudioController characterAudioController;
     public float attackRange = 0.5f;
     public int attackDamage = 50;
 
@@ -19,7 +19,7 @@ public class PlayerCombat : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -49,12 +49,19 @@ public class PlayerCombat : MonoBehaviour
             if(enemy.GetComponent<MeleeEnemy>() != null)
             {
                 enemy.GetComponent<MeleeEnemy>().TakeDamage(attackDamage);
+                characterAudioController.PlayEnemyHitSound();
                 Debug.Log(this.gameObject.name + "hit" + enemy.name);
+            }
+            else if(enemy.GetComponent<FlyingEnemy>() != null)
+            {
+                enemy.GetComponent<FlyingEnemy>().TakeDamage(attackDamage);
+                characterAudioController.PlayEnemyHitSound();
             }
             else if (enemy.GetComponent<BossHead>() != null)
             {
                 enemy.GetComponent<BossHead>().TakeDamage(attackDamage);
             }
+            
             
         }
     }

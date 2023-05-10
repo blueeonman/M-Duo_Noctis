@@ -41,7 +41,7 @@ public class StartBossFight : MonoBehaviour
 
     public IEnumerator BossPrep()
     {
-        //bgm.Pause();
+        bgm.Pause();
         yield return new WaitForSeconds(5);
         boss.gameObject.SetActive(true);
         boss.PlayBossMusic();

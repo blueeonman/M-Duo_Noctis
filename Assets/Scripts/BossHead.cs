@@ -12,6 +12,7 @@ public class BossHead : MonoBehaviour
     //[SerializeField] private int damage = 1;
     [SerializeField] private BoxCollider2D boxCollider;
     [SerializeField] private LayerMask playerLayer;
+    public AudioSource bossHurt;
     public Animator animator;
     public BossDeath bossDeath;
     //private float cooldownTimer = Mathf.Infinity;
@@ -78,7 +79,7 @@ public class BossHead : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-
+        bossHurt.Play();
         //play hurt animation
         //animator.SetTrigger("Hurt");
         if(currentHealth <= 0)

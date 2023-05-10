@@ -9,6 +9,7 @@ public class CharacterAudioController : MonoBehaviour
     public AudioClip deathClip;
     public AudioClip dashClip;
     public AudioClip walkClip;
+    public AudioClip enemyHitClip;
    
 
     private AudioSource audioSource;
@@ -38,5 +39,10 @@ public class CharacterAudioController : MonoBehaviour
     public void PlayDeathSound()
     {
         audioSource.PlayOneShot(deathClip);
+    }
+
+    public void PlayEnemyHitSound()
+    {
+        audioSource.PlayOneShot(enemyHitClip);
     }
 }
