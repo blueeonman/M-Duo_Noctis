@@ -14,8 +14,11 @@ public class Dash : MonoBehaviour
     private float dashCount;
     public float startDashCount;
     private int side;
-    public float doubleTapTime;
+    public float doubleTapTime; 
+    public AudioSource dashSound;
     public Animator animator;
+
+    
 
    
         public void Start()
@@ -84,12 +87,15 @@ public class Dash : MonoBehaviour
                 if (side == 1)
                 {
                     rig.velocity = Vector2.left * dashSpeed;
+                    dashSound.Play();
                     StartCoroutine(DashAnims());
                 }
                 else if (side == 2)
                 {
                     rig.velocity = Vector2.right * dashSpeed;
+                    dashSound.Play();
                     StartCoroutine(DashAnims());
+
                 }
             }
         }
