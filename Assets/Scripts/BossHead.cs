@@ -13,6 +13,7 @@ public class BossHead : MonoBehaviour
     [SerializeField] private BoxCollider2D boxCollider;
     [SerializeField] private LayerMask playerLayer;
     public Animator animator;
+    public BossDeath bossDeath;
     private float cooldownTimer = Mathf.Infinity;
 
     //References
@@ -77,23 +78,13 @@ public class BossHead : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+
         //play hurt animation
         //animator.SetTrigger("Hurt");
         if(currentHealth <= 0)
         {
-            Die();
+            bossDeath.bossDie();
         }
-
-    }
-    void Die()
-    {
-        // Die animation
-        //animator.SetBool("IsDead", true);
-        
-        Debug.Log(this.gameObject.name + "died!");
-        //Disable enemy
-        GetComponent<Collider2D>().enabled = false;
-        gameObject.SetActive(false);
 
     }
 }
