@@ -574,7 +574,7 @@ Animator:
   m_GameObject: {fileID: 4886610087541800024}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: aacef4c187c30e64cbaf8803fa32aae4, type: 2}
+  m_Controller: {fileID: 9100000, guid: 4ecb5df3074d81645817a8afe92b06d3, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -752,6 +752,7 @@ GameObject:
   - component: {fileID: 5046367221057557269}
   - component: {fileID: 3625924520281427803}
   - component: {fileID: 8215115439210407354}
+  - component: {fileID: 2401505631417343636}
   - component: {fileID: 4886610086418548498}
   m_Layer: 7
   m_Name: playerWithGrapple
@@ -854,6 +855,7 @@ MonoBehaviour:
   doubleTapTime: 0
   positionRadius: 0
   flipSprite: {fileID: 4886610087541800030}
+  animator: {fileID: 0}
   radius: 0
   hookPoint: {fileID: 0}
   sinTime: 0
@@ -1087,6 +1089,23 @@ MonoBehaviour:
   dashSpeed: 35
   startDashCount: 0.2
   doubleTapTime: 0
+--- !u!114 &2401505631417343636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5046367221057557277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 900de303752b14448a9e1edb627a7c86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  maxHealth: 100
+  healthBar: {fileID: 1904570671726359319}
+  player: {fileID: 5046367221057557277}
+  respawnPoint: {fileID: 0}
 --- !u!231 &4886610086418548498
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -1104,7 +1123,7 @@ SpringJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 187.50421
+  m_Distance: 2.9068882
   m_DampingRatio: 1
   m_Frequency: 1
 --- !u!1 &8452002123219105598
@@ -1235,6 +1254,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e550553d558643e45a19f0228b0ddcb9, type: 3}
+--- !u!114 &1904570671726359319 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2424962066802147029, guid: e550553d558643e45a19f0228b0ddcb9, type: 3}
+  m_PrefabInstance: {fileID: 4308069942938930626}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &7014356213590448117 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6529842437785213495, guid: e550553d558643e45a19f0228b0ddcb9, type: 3}

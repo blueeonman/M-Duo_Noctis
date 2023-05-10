@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.UI;
 using UnityEngine;
 
@@ -45,8 +46,16 @@ public class PlayerCombat : MonoBehaviour
         //Damage them
         foreach(Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<MeleeEnemy>().TakeDamage(attackDamage);
-            Debug.Log(this.gameObject.name + "hit" + enemy.name);
+            if(enemy.GetComponent<MeleeEnemy>() != null)
+            {
+                enemy.GetComponent<MeleeEnemy>().TakeDamage(attackDamage);
+                Debug.Log(this.gameObject.name + "hit" + enemy.name);
+            }
+            else if (enemy.GetComponent<BossHead>() != null)
+            {
+                enemy.GetComponent<BossHead>().TakeDamage(attackDamage);
+            }
+            
         }
     }
 

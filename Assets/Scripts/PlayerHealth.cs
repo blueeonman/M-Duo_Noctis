@@ -13,7 +13,7 @@ public class PlayerHealth : MonoBehaviour
     public Transform respawnPoint;
     void Start()
     {
-        maxHealth = health;
+        health = maxHealth;
     }
 
     // Update is called once per frame
