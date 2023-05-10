@@ -18,7 +18,13 @@ public class PlayerMovement : MonoBehaviour
     public float positionRadius;
     public FlipSprite flipSprite;
     
+    private enum MovementState
+    {
+        Idle,
+        Walk,
+        Jump
 
+    }
 
     private Rigidbody2D rig;
     public Animator animator;
@@ -28,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
    // [SerializeField] float speed1 = 5f;
 
     public Transform hookPoint;
+    public Transform groundCheck;
     public float sinTime;
 
     public float angle = 0;
@@ -63,6 +70,8 @@ public class PlayerMovement : MonoBehaviour
     {
 
         rig = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        isOnGround = false;
         
         //  sr = GetComponent<SpriteRenderer>();
         //Debug.Log($"1 Jump count = {jumpCount} e maxJump = {maxJump}");
@@ -80,10 +89,14 @@ public class PlayerMovement : MonoBehaviour
         pos.x += horizontal * speed * Time.deltaTime;
         if (Input.GetButtonDown("Jump") && jumpCount <= maxJump)
         {
+            
             rig.velocity = Vector2.up * speed;
             jumpCount++;
+           //animator = SetBool("Grounded");
             // Debug.Log($"2 Jump count = {jumpCount} e maxJump = {maxJump}");
         }
+        
+      
 
 
         if (Input.GetKey("a") || Input.GetKey("d"))
@@ -97,14 +110,18 @@ public class PlayerMovement : MonoBehaviour
 
         horizontal = Input.GetAxisRaw("Horizontal");
 
+      
+
         flipSprite.Flip();
 
-
+        Animation();
        
      }
         void OnCollisionEnter2D(Collision2D colisor)
         {
 
+           
+        
             jumpCount = 0;
 
 
@@ -128,10 +145,10 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-        public bool IsGrounded()
+       public bool IsGrounded()
         {
-            //return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
-        }*/
+            return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+        }
 
 
         /*public void Flip()
@@ -144,6 +161,9 @@ public class PlayerMovement : MonoBehaviour
                 transform.localScale = localScale;
             }
         }*/
+
+    
+
 
     private void SetStartingAngle()
     {
@@ -164,6 +184,11 @@ public class PlayerMovement : MonoBehaviour
             direction = 1;
     }
 
+  
+    private void Animation()
+    {
+        animator.SetFloat("isWalking", Mathf.Abs(horizontal));
+    }
   
 
 
