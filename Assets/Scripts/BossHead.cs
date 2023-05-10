@@ -9,12 +9,12 @@ public class BossHead : MonoBehaviour
     [SerializeField] private float attackCooldown;
     [SerializeField] private float range;
     [SerializeField] private float colliderDistance;
-    [SerializeField] private int damage = 1;
+    //[SerializeField] private int damage = 1;
     [SerializeField] private BoxCollider2D boxCollider;
     [SerializeField] private LayerMask playerLayer;
     public Animator animator;
     public BossDeath bossDeath;
-    private float cooldownTimer = Mathf.Infinity;
+    //private float cooldownTimer = Mathf.Infinity;
 
     //References
     private Animator anim;

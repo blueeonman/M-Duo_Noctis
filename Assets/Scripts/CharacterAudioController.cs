@@ -8,7 +8,7 @@ public class CharacterAudioController : MonoBehaviour
     public AudioClip attackClip;
     public AudioClip deathClip;
     public AudioClip dashClip;
-    public AudioClip GrappleClip;
+    public AudioClip walkClip;
    
 
     private AudioSource audioSource;
@@ -26,9 +26,9 @@ public class CharacterAudioController : MonoBehaviour
     {
         audioSource.PlayOneShot(dashClip);
     }
-    public void PlayGrappleSound()
+    public void PlayWalkSound()
     {
-        audioSource.PlayOneShot(GrappleClip);
+        audioSource.PlayOneShot(walkClip);
     }
     public void PlayAttackSound()
     {

@@ -41,7 +41,11 @@ public class PlayerHealth : MonoBehaviour
         health -= damageAmount;
         if(health <= 0)
         {
-            //Respawn();
+            Respawn();
         }
+    }
+    public void NewRespawn(Transform newRespawn)
+    {
+        respawnPoint.position = newRespawn.position;
     }
 }

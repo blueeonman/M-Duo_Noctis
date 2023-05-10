@@ -7,7 +7,8 @@ public class BossDeath : MonoBehaviour
 {
     public GameObject bossPrefab;
     public AudioSource deathSound;
-    
+    public AudioSource bgm;
+    public GameObject bossBarrier;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +29,8 @@ public class BossDeath : MonoBehaviour
         Debug.Log(this.gameObject.name + "died!");
         //Disable enemy
         Destroy(bossPrefab.gameObject);
+        Destroy(bossBarrier);
+        bgm.UnPause();
 
     }
 }
