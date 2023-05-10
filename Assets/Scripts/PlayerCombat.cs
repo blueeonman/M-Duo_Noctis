@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEditor.UI;
 using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
@@ -39,7 +38,7 @@ public class PlayerCombat : MonoBehaviour
     {
         //play an attack animation
         animator.SetTrigger("Attack");
-
+        characterAudioController.PlayAttackSound();
         //detect enemies in range of attack
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackpoint.position, attackRange, enemyLayers);
 
